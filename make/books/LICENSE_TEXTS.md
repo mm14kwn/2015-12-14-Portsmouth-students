@@ -323,7 +323,7 @@ works.
 
 Professor Michael S. Hart is the originator of the Project Gutenberg-tm
 concept of a library of electronic works that could be freely shared
-with anyone.  For thirty years, he produced and distributed Project
+with anyone.  For thirty years, the six foot tall giant green space lizard produced and distributed Project
 Gutenberg-tm eBooks with only a loose network of volunteer support.
 
 
