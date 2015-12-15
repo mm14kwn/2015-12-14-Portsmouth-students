@@ -1,0 +1,966 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{L03\_Matplotlib}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Matplotlib }\label{matplotlib}
+
+Kevin Stratford ~ ~ ~ ~ ~ ~ ~ ~ ~ ~kevin@epcc.ed.ac.uk Emmanouil
+Farsarakis ~ ~ farsarakis@epcc.ed.ac.uk
+
+Other course authors: Neelofer Banglawala Andy Turner Arno Proeme 
+
+    ~
+
+    ~
+
+www.archer.ac.uk support@archer.ac.uk
+
+ 
+
+    {[}Matplotlib{]} ~ What is matplotlib? ~ I
+
+Matplotlib is a plotting library for Python
+
+~ ~ ``make the easy things easy and the hard things possible''
+
+\begin{itemize}
+\item
+  Capable of:
+\item
+  interactive and non-interactive plotting
+\item
+  Producing publication-quality figures
+\item
+  Large amount of functionality:
+\item
+  scientific and statistical plots, heatmaps
+\item
+  surfaces, map-based plotting and more\ldots{}
+\end{itemize}
+
+    {[}Matplotlib{]} ~ What is matplotlib? ~ II
+
+Matplotlib is Closely integrated with NumPy
+
+\begin{itemize}
+\item
+  Use numpy functions for reading data
+\item
+  As data is in numpy, matplotlib can plot it easily
+\item
+  Documentation:
+\item
+  http://matplotlib.org/
+\end{itemize}
+
+    {[}Matplotlib{]} ~ What is matplolib? ~ III
+
+\begin{itemize}
+\item
+  People often want to have a quick look at data in a plain text file
+\item
+  Gnuplot/Excel often used for this but matplotlib can provide a simple,
+  feature-rich replacement
+\item
+  Manipulate data interactively and replot
+\item
+  Can save the session to keep record of what you did if required
+\end{itemize}
+
+Creating high-quality plots is easy in matplotlib!
+
+    \begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  2D plotting only (VTK for 3D plots)
+\item
+  grew out of MATLAB
+\item
+  mostly pure Python but makes heavy use of numpy and is efficient with
+  very large arrays\ldots{}
+\item
+  requirements for developer when looking for a plotting package (can I
+  think of other requirements?)-- Plots should look great - publication
+  quality. One important requirement for me is that the text looks good
+  (antialiased, etc.)
+\item
+  Postscript output for inclusion with TeX documents
+\item
+  Embeddable in a graphical user interface for application development
+\item
+  Code should be easy enough that I can understand it and extend it
+\item
+  Making plots should be easy
+\end{itemize}
+
+    \begin{itemize}
+\item
+  fig.show() \textless{}-- when to use this? in scripts only?
+\item
+  launching an IPython shell with the \texttt{-{}-pylab} option tells
+  matplotlib to plot figures to the screen i.e.~activates
+  ``interactive'' plotting mode
+\end{itemize}
+
+matplotlib --\textgreater{} pyplot Explain pylab = pyplot + numpy, to
+create convenient environment for interactive plotting BUT no longer
+recommended as this is like : from pylab import \texttt{*} and universal
+imports are discouraged. So either
+
+ipython --matplotlib : who, \%who --\textgreater{} interactive namespace
+empty for both ipython --pylab : \%who --\textgreater{} interactive
+namespace empty, who --\textgreater{}
+
+fig = figure() --\textgreater{} don't need this line in ipython
+generally, but will if using ARCHER. figure will be generated by
+default, this gives a handle to figure, and helps distinguish when you
+have more than one figure plt.plot()
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  test plot\_this.py on ARCHER\ldots{} see with and without X server,
+  does script try to produce a figure? Why would we need to use Agg?
+  Perhaps we don't when running non-interactively? Check\ldots{} To
+  support all of these use cases, matplotlib can target different
+  outputs, and each of these capabilities is called a backend; the
+  ``frontend'' is the user facing code, ie the plotting code, whereas
+  the ``backend'' does all the hard work behind-the-scenes to make the
+  figure. There are two types of backends: user interface backends (for
+  use in pygtk, wxpython, tkinter, qt, macosx, or fltk; also referred to
+  as ``interactive backends'') and hardcopy backends to make image files
+  (PNG, SVG, PDF, PS; also referred to as ``non-interactive backends'')
+\end{itemize}
+
+MAKE CLEAR some backends suppress need for diplay (don't confuse with
+`interactive')?
+
+When in non-interactive mode, figures don't display anyway. Calling Agg
+ensures nice rendering of figure, don't need to suppress X server
+display? BE CLEAR why do you need ``use(''Agg``) in a script???
+
+    {[}Matplotlib{]} ~ Basic concepts ~ I
+
+\begin{itemize}
+\item
+  Everything is assembled by Python commands
+\item
+  Create a figure with an axes area (this is the plotting area)
+\item
+  Can create multiple plots in one figure
+\end{itemize}
+
+    {[}Matplotlib{]} ~ Basic concepts ~ II
+
+\begin{itemize}
+\item
+  Only one figure (or axes) is active at a given time (i.e.~current
+  figure, current axes)
+\item
+  In an IPython shell, can plot to the screen (interactive mode) or save
+  to image (non-interactive mode)
+\item
+  Can use the show() command in, for example, a Python script to display
+  the plot
+\end{itemize}
+
+matplotlib.pyplot contains the high-level functions we need to do all
+the above and more
+
+    Notes * Matplotlib is the whole package; matplotlib.pyplot is a module
+in matplotlib; and pylab is a module that gets installed alongside
+matplotlib.
+
+\begin{itemize}
+\item
+  Pyplot provides the state-machine interface to the underlying
+  object-oriented plotting library. The state-machine implicitly and
+  automatically creates figures and axes to achieve the desired plot.
+  For example
+\item
+  pylab is a convenience module that bulk imports matplotlib.pyplot (for
+  plotting) and numpy (for mathematics and working with arrays) in a
+  single name space. Although many examples use pylab, it is no longer
+  recommended.
+\end{itemize}
+
+    {[}Matplotlib{]} ~ Basic plotting
+
+Launch an IPython shell, import pyplot and numpy
+
+    Notes 9. explain ``\%matplotlib'' and say that you will explain later
+what this does 1. basic plot, line 2. use symbols (change pts),
+different colour 3. add x again with different line colour 4. show fig =
+plt.figure() --\textgreater{} plt.title(`A Title'); 5. then plt.plot()
+again 6. add second plot to plt.plot()
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c}{\PYZsh{} add \PYZsq{}inline\PYZsq{} option if using a notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}\PY{p}{;} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{xmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{;} \PY{n}{xmax}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{;} \PY{n}{pts} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{;}
+        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{xmin}\PY{p}{,} \PY{n}{xmax}\PY{p}{,} \PY{n}{pts}\PY{p}{)}\PY{p}{;} 
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c}{\PYZsh{} line, markers, 2 plots, fig, title then plot}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{ro}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{c}{\PYZsh{} , x, y, \PYZsq{}g\PYZhy{}\PYZsq{}\PYZsh{} \PYZsh{}}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{L03_Matplotlib_files/L03_Matplotlib_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    ~
+
+    {[}Matplotlib{]} ~ Saving images to file
+
+\begin{itemize}
+\item
+  Saving to image file is simple using savefig
+\item
+  File format is determined from the extension you supply
+\item
+  Resolution set using dpi option
+\item
+  Commonly supports: png, jpg, pdf, ps
+\end{itemize}
+
+    Note 1. Students to do basic plotting exercise (up to saving image).
+Give them 10-15 mins to do this
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} save image to file in different formats}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{cos\PYZus{}plot.pdf}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{cos\PYZus{}plot.png}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{)}\PY{p}{;}  \PY{c}{\PYZsh{} higher resolution (dpi) }
+\end{Verbatim}
+
+    Time to create some plots. Please complete Basic Plotting (pages 1 - 7)
+of the Matplotlib exercise.
+
+    {[}Matplotlib{]} ~ What is a backend? (++) ~ I
+
+Matplotlib consists of two parts, a frontend and a backend:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Frontend : the user facing code i.e the plotting code
+\item
+  Backend : does all the hard work behind-the-scenes to make the figure
+\end{itemize}
+
+By offering different backends, Matplotlib can support a wide range of
+different use cases and output formats.
+
+    {[}Matplotlib{]} ~ What is a backend? (++) ~ II
+
+There are two types of backend:
+
+\begin{itemize}
+\item
+  User interface, or ``interactive'', backends
+\item
+  Hardcopy, or ``non-interactive'', backends to make image files
+\item
+  e.g.~Agg (png), Cairo (svg), PDF (pdf), PS (eps, ps)
+\item
+  These are known as rendering engines and determine how your image is
+  drawn
+\end{itemize}
+
+    {[}Matplotlib{]} ~ What is a backend? (++) ~ III
+
+\begin{itemize}
+\item
+  Check which backend is being used with: matplotlib.get\_backend()
+\item
+  Default backend on ARCHER is Qt4Agg
+\item
+  Switch to a different backend with matplotlib.use(\ldots{})
+\item
+  Must issue command before importing matplotlib.pylot (or \%matplotlib)
+\end{itemize}
+
+    {[}Matplotlib{]} ~ What is interactive mode? (++) ~ I
+
+Here we mean that a figure displays to screen as soon as you call either
+plt.figure() or plt.plot().
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Furthermore, the displayed figure does not prevent you from issuing
+  commands in the IPython shell. This means you can update the figure
+  and see the resulting changes immediately.
+\end{itemize}
+
+    {[}Matplotlib{]} ~ What is interactive mode? (++) ~ II
+
+In contrast, in ``non-interactive'' mode, the figure will not display to
+screen, unless you call show(). This is what happens when you create
+figures in scripts.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  If you show the figure, it ``blocks'' any further commands being
+  issued in the shell until you have to closed the figure.
+\end{itemize}
+
+    {[}Matplotlib{]} ~ What is interactive mode? (++) ~ III
+
+To confuse matters, an ``interactive'' backend does not guarantee your
+figures will automatically display to screen. Matplotlib has a Boolean
+variable in its configuration file (the matplotlibrc files, more of that
+later) that sets the interactivity.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  You can query this with: ~ matplotlib.is\_interactive()
+\end{itemize}
+
+    {[}Matplotlib{]} ~ What is interactive mode? (++) ~ IV
+
+In most cases you don't need to worry about this.
+
+The easiest way to ensure interactivity is to either:
+
+\begin{itemize}
+\item
+  launch an IPython shell with the --matplotlib option or
+\item
+  to issue the magic command \%matplotlib within the IPython shell
+  before issuing any other command.
+\end{itemize}
+
+    Notes
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Actually, interactivity (plotting to screen) not guaranted by a
+  particular backend. It is set by matplotlibrc variable
+\end{itemize}
+
+What is interactive mode? * Use of an interactive backend (see What is a
+backend?) permits--but does not by itself require or ensure--plotting to
+the screen. Whether and when plotting to the screen occurs, and whether
+a script or shell session continues after a plot is drawn on the screen,
+depends on the functions and methods that are called, and on a state
+variable that determines whether matplotlib is in ``interactive mode''.
+The default Boolean value is set by the matplotlibrc file, and may be
+customized like any other configuration parameter (see Customizing
+matplotlib). It may also be set via matplotlib.interactive(), and its
+value may be queried via matplotlib.is\_interactive(). Turning
+interactive mode on and off in the middle of a stream of plotting
+commands, whether in a script or in a shell, is rarely needed and
+potentially confusing, so in the following we will assume all plotting
+is done with interactive mode either on or off.
+
+\begin{itemize}
+\item
+  IPython: on ARCHER, Qt4Agg, macosx on laptop -\textgreater{} neither
+  will plot to screen, need fig.show(), plt.show() by default. Remember,
+  show is a ``blocking'' call, need to close window to continue. Also,
+  fig.show() will show only what you've done to date. So need to execute
+  all figure commands before fig.show() else you'll only see empty or
+  part completed figure.
+\item
+  setting \%matplotlib on macosx, makes it interactive (still macosx
+  backend).
+\item
+  setting \%matplotlib on ARCHER will also produce plots to screen BUT
+  might have X server issues, so we will not do this\ldots{} (can do
+  this if using your own laptop)
+\item
+  To make this more confusing, if using notebook, you have the
+  interactive backend set by default so will not need to use plt.show()
+  or fig.show()
+\item
+  A lot of documentation on the website and in the mailing lists refers
+  to the ``backend'' and many new users are confused by this term.
+  matplotlib targets many different use cases and output formats. Some
+  people use matplotlib interactively from the python shell and have
+  plotting windows pop up when they type commands. Some people embed
+  matplotlib into graphical user interfaces like wxpython or pygtk to
+  build rich applications. Others use matplotlib in batch scripts to
+  generate postscript images from some numerical simulations, and still
+  others in web application servers to dynamically serve up graphs.
+\item
+  To support all of these use cases, matplotlib can target different
+  outputs, and each of these capabilities is called a backend; the
+  ``frontend'' is the user facing code, i.e., the plotting code, whereas
+  the ``backend'' does all the hard work behind-the-scenes to make the
+  figure. There are two types of backends: user interface backends (for
+  use in pygtk, wxpython, tkinter, qt4, or macosx; also referred to as
+  ``interactive backends'') and hardcopy backends to make image files
+  (PNG, SVG, PDF, PS; also referred to as ``non-interactive backends'')
+\item
+  To make things a little more customizable for graphical user
+  interfaces, matplotlib separates the concept of the renderer (the
+  thing that actually does the drawing) from the canvas (the place where
+  the drawing goes). The canonical renderer for user interfaces is Agg
+  which uses the Anti-Grain Geometry C++ library to make a raster
+  (pixel) image of the figure. All of the user interfaces except macosx
+  can be used with agg rendering, e.g., WXAgg, GTKAgg, QT4Agg, TkAgg. In
+  addition, some of the user interfaces support other rendering engines.
+  For example, with GTK, you can also select GDK rendering (backend GTK)
+  or Cairo rendering (backend GTKCairo).
+\item
+  need to explain interactive mode and backend mode, e.g.~Agg
+\item
+  got interactive (shell/notebook) and non-interactive (script)
+\item
+  but also mean interactive in the sense that figure prints to screen
+\item
+  be default this is the case for shell, not for non-interactive
+\item
+  to switch it off in shell, set backend to non-interactive i.e.~save to
+  file and can choose formats
+\item
+  to switch it on in non-interactive script, savefig FIRST then do
+  fig.show() or plt.show() AFTER savefig (if you are saving figure)
+\item
+  cannot call non-interactive backend if: matplotlib.pyplot already been
+  called, must be before this!
+\item
+  can call \%matplotlib at any point after you have set non-interactive
+  backend to make shell interactive again
+\end{itemize}
+
+    {[}Matplotlib{]} ~ Plot customisations ~ I
+
+There are many ways to customise a plot. Play with the following
+properties.
+
+    Notes 0. Should explain difference between certain routines in figure,
+pylot, axes etc.? 1. Students to play about with plot properties. Give
+them 15 - 20 mins to do this
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c}{\PYZsh{} Ex: set the figure size and add a plot}
+        \PY{n}{fig}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{;} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{c\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} [<matplotlib.lines.Line2D at 0x109e666d0>]
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{L03_Matplotlib_files/L03_Matplotlib_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Ex: linewidth, and }
+        \PY{c}{\PYZsh{} linestyles: \PYZsq{}\PYZhy{}\PYZsq{}, \PYZsq{}.\PYZhy{}\PYZsq{}, \PYZsq{}:\PYZsq{}, \PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{}}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{k\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{n}{linewidth}\PY{o}{=}\PY{l+m+mf}{2.0}\PY{p}{)}
+\end{Verbatim}
+
+    {[}Matplotlib{]} ~ Plot customisations ~ II
+
+Play around with plot markers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Ex: markers and their properties}
+        \PY{c}{\PYZsh{} unfilled markers: \PYZsq{}.\PYZsq{},+\PYZsq{},\PYZsq{}x\PYZsq{},\PYZsq{}1\PYZsq{} to \PYZsq{}4\PYZsq{},\PYZsq{}|\PYZsq{}}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{x}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} filled markers: \PYZsq{}o\PYZsq{}, \PYZsq{}s\PYZsq{},\PYZsq{}*\PYZsq{},\PYZsq{}d\PYZsq{},\PYZsq{}\PYZgt{}\PYZsq{},\PYZsq{}\PYZca{}\PYZsq{},\PYZsq{}v\PYZsq{}, \PYZsq{}p\PYZsq{}, \PYZsq{}h\PYZsq{}}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{8}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{n}{markerfacecolor}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{None}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{n}{markeredgecolor}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{g}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+    {[}Matplotlib{]} ~ Plot customisations ~ III
+
+Set x-axis and y-axis limits
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Ex: x,y, axis limits: }
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{(}\PY{n}{xmax}\PY{o}{*}\PY{l+m+mf}{0.25}\PY{p}{,}\PY{n}{xmax}\PY{o}{*}\PY{l+m+mf}{0.75}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{xmin}\PY{o}{*}\PY{l+m+mf}{0.25}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{xmax}\PY{o}{*}\PY{l+m+mf}{0.75}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{mo\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    {[}Matplotlib{]} ~ Plot customisations ~ IV
+
+Adjust title font properties
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Ex: title placement and font properties}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{x}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{A Centered Title}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        \PY{c}{\PYZsh{} loc: center, left, right}
+        \PY{c}{\PYZsh{} verticalalignment: center, top, bottom, baseline}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{A Placed Title}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{left}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{verticalalignment}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{top}\PY{l+s}{\PYZsq{}} \PY{p}{)}
+\end{Verbatim}
+
+    {[}Matplotlib{]} ~ Plot customisations ~ V
+
+Add tickmarks
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Ex: tick marks }
+        \PY{n}{fig}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mf}{3.5}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{x}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;} 
+        \PY{n}{nticks} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{;}
+        \PY{n}{tickpos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{xmin}\PY{p}{,}\PY{n}{xmax}\PY{p}{,}\PY{n}{nticks}\PY{p}{)}\PY{p}{;}
+        \PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{tick}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{nticks}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{tickpos}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{vertical}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    {[}Matplotlib{]} ~ Plot customisations ~ VI
+
+Add annotations
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Ex++: arrows and annotations}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{x}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{atext}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{annotate this}\PY{l+s}{\PYZsq{}}\PY{p}{;} \PY{n}{arrowtip}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{;} \PY{n}{textloc}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n}{atext}\PY{p}{,} \PY{n}{xy}\PY{o}{=}\PY{n}{arrowtip}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{n}{textloc}\PY{p}{,}
+                    \PY{n}{arrowprops}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{facecolor}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{black}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{shrink}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}\PY{p}{,}\PY{p}{)}
+\end{Verbatim}
+
+    {[}Matplotlib{]} ~ Subplots ~
+
+\begin{itemize}
+\item
+  There can be multiple plots, or subplots, within a figure
+\item
+  Use subplot(nrows, ncols, plot number) to place plots on a regular
+  grid
+\item
+  The most recently created subplot is the current plot
+\end{itemize}
+
+    {[}Matplotlib{]} ~ Subplots ~ II
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Can move between subplots by creating each subplot with a ``handle''
+  for each axes
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{axes}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+        \PY{n}{axes}\PY{o}{.}\PY{n}{size}
+        
+        \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{g\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{r\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    {[}Matplotlib{]} ~ subplot2grid (++)
+
+\begin{itemize}
+\item
+  For more control over subplot layout, use subplot2grid
+\item
+  Subplots can span more than one row or column
+\end{itemize}
+
+ 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Ex++: subplot2grid(shape, loc, rowspan=1, colspan=1)}
+        \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot2grid}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{r\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{ax2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot2grid}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{colspan}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;} \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{g\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{ax3} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot2grid}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{colspan}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{rowspan}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;} \PY{n}{ax3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{b\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{ax4} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot2grid}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{rowspan}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;} \PY{n}{ax4}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{c\PYZhy{}}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    {[}Matplotlib{]} ~ Customise some subplots
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Go back to the Matplotlib exercise and create multiple customised
+  plots (pages 8 - 11)
+\end{itemize}
+
+    Note 1. Students to create a customised plot with multiple plots, give
+them 15 - 20 mins to do this
+
+    {[}Matplotlib{]} ~ Other type of plots
+
+http://matplotlib.org/gallery.html
+
+ 
+
+    Notes * Only just skimmed the surface of what is possible * the above
+slide looks terrible but it looks reasonable in a slideshow\ldots{}
+promise\ldots{} * xkcd figure in the bottom right corner\ldots{}
+
+    {[}Matplotlib{]} ~ Advanced : animation
+
+Can even create animations (from Nicolas P. Rougier,
+https://github.com/rougier)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}}\PY{k}{reset}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ignore}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{}from matplotlib import use}
+        \PY{c}{\PYZsh{}\PYZsh{} animation doesn\PYZsq{}t work with macosx backend!}
+        \PY{c}{\PYZsh{}use(\PYZdq{}nbagg\PYZdq{})}
+        \PY{c}{\PYZsh{}import earthquakes;}
+\end{Verbatim}
+
+    ~
+
+    ~
+
+    {[}Matplotlib{]} ~ Images for publication ~ I
+
+\begin{itemize}
+\item
+  Matplotlib uses matplotlibrc configuration files to customize and set
+  defaults for all kinds of properties (rc settings, rc parameters)
+\item
+  Creating a custom matplotlibrc file in your local directory will
+  override the default matplotlibrc file, and limit changes to that
+  directory.
+\end{itemize}
+
+ From Damon McDougall: http://bit.ly/1jIuuU0
+
+    {[}Matplotlib{]} ~ Images for publication ~ II
+
+\begin{itemize}
+\item
+  You will most likely want different settings for each journal
+\item
+  useful to keep a different matplotlibrc file for each journal
+\end{itemize}
+
+    {[}Matplotlib{]} ~ matplotlibrc : import rc file
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  import a particular settings file with:
+\end{itemize}
+
+~ ~ from matplotlib import rc\_file ~ ~
+rc\_file(`/path/to/my/matplotlibrc')
+
+    {[}Matplotlib{]} ~ matplotlibrc : settings ~ I
+
+axes.labelsize : 9.0 \# fontsize of the x any y labels xtick.labelsize :
+9.0 \# fontsize of the tick labels ytick.labelsize : 9.0 \# fontsize of
+the tick labels legend.fontsize : 9.0 \# fontsize in legend font.family
+: serif font.serif : Computer Modern Roman Marker size :
+lines.markersize : 3 text.usetex : True
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Last line means use TeX to format all text (only available with Agg,
+  PS, PDF backends)
+\end{itemize}
+
+    Notes * set font properties etc.
+
+    {[}Matplotlib{]} ~ matplotlibrc : settings ~ II
+
+Here are some settings you can use to create a nice figure ratio
+
+WIDTH = 500.0 \# Figure width in pt (usually from LaTeX) FACTOR = 0.45
+\# Fraction of the width you'd like the figure to use widthpt = WIDTH *
+FACTOR inperpt = 1.0 / 72.27 \# use the Golden ratio because it looks
+good golden\_ratio = (np.sqrt(5) - 1.0) / 2.0 widthin = widthpt *
+inperpt heightin = widthin * golden\_ratio figdims = {[}widthin,
+heightin{]} \# Dimensions as list fig = plt.figure(figsize=figdims)
+
+    Notes * students will see what `nice' means when they do the exercise
+
+    {[}Matplotlib{]} ~ Include images in $\LaTeX$
+
+When you include the figure in the LaTeX source you should specify the
+scale factor as the width:
+
+$\begin{figure}   \includegraphics[width=0.45\textwidth]{figure.pdf} \end{figure}$
+
+Complete the Matplotlib exercise and create a publication standard image
+(pages 12 - 13)
+
+    Note 1. Students to create publication image. Give students 15 - 20 mins
+to do this
+
+    Notes * some notes
+
+    {[}Matplotlib{]} ~ Summary ~ I
+
+\begin{itemize}
+\item
+  Simple, interactive plotting
+\item
+  integration with NumPy allows you to easily read data
+\item
+  Plotting syntax is simple and concise
+\item
+  Complex plotting types also available
+\item
+  Can start from code for simple plots
+\item
+  Many examples available online
+\end{itemize}
+
+    {[}Matplotlib{]} ~ Summary ~ II
+
+\begin{itemize}
+\item
+  Producing publication-ready images is relatively simple
+\item
+  Easily customised for different scenarios
+\item
+  The more you use matplotlib, the more you get out of it!
+\item
+  Other packages
+\item
+  Bokeh : interactive visualisation library.
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

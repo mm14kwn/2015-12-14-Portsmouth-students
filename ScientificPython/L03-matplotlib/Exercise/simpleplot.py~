@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+import matplotlib.pyplot as plt
+import numpy as np
+def kwnplot(filepath)
+    "plots x-y data from file given by filepath"
+    data=np.genfromtxt(filepath)
+    print data
+    fig = plt.figure()
+    plt.plot(data[:,0],data[:,1]);
+    fig.show()
+
+kwnplot('./data/random1.dat')
+
+kwnplot('./data/random2.dat')

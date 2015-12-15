@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source activate py27
+NB_FILES=find ~/swc_repo/ -name '*.ipynb'
+for i in $NB_FILES
+do
+    ipython nbconvert --to latex --post pdf
+done
+
+PDF_FILES=find ~/swc_repo/ -name '*.pdf'
+mkdir ~/python/swc_pdfs
+cp $PDF_FILES ~/python/swc_pdfs/

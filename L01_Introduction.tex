@@ -1,0 +1,799 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{L01\_Introduction}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \#
+
+\section{Scientific Python }\label{scientific-python}
+
+Kevin Stratford ~ ~ ~ ~ ~ ~ ~ ~ ~ ~kevin@epcc.ed.ac.uk Emmanouil
+Farsarakis ~ ~ farsarakis@epcc.ed.ac.uk
+
+Other course authors: Neelofer Banglawala Andy Turner Arno Proeme 
+
+    ~
+
+    ~
+
+www.archer.ac.uk support@archer.ac.uk
+
+ 
+
+    {[}Intro{]} ~ Course overview
+
+Course website ~ ~ ~ https://hpcarcher.github.io/2015-12-14-Portsmouth/
+
+Course material ~ ~ ~ as above
+
+    {[}Intro{]} ~ Scientific computing
+
+Typical workflow
+
+\begin{itemize}
+\item
+  Generate data usually from simulation on HPC facilities (also from
+  experiment!)
+\item
+  Process data to generate appropriate results
+\item
+  Visualise results to understand the significance of our work and gain
+  scientific understanding
+\item
+  Communicate results through publications, presentations, web, etc.
+\end{itemize}
+
+ 
+
+    {[}Intro{]} ~ Why Python?
+
+Python is a very flexible tool
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Simple to learn
+\item
+  Can program ``procedurally'' or use full-blown OOP
+\item
+  High level: focus on what code does not how to write it
+\item
+  Interactive python shell aids rapid prototyping
+\item
+  Extensive standard library (and packages)
+\end{itemize}
+
+    {[}Intro{]} ~ For scientific computing?
+
+Rich set of scientific computing functionality
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Standard numerical and scientific libraries
+\item
+  Extensive graphical functionality
+\item
+  Can interface with existing C/C++/Fortran code
+\item
+  Good for control of complex ``workflow''
+\end{itemize}
+
+ 
+
+    {[}Intro{]} ~ And\ldots{}
+
+\begin{itemize}
+\item
+  Free and Open Source
+\item
+  Interactive Python is an alternative to Matlab, R
+\item
+  Currently a ``growth area''
+\item
+  Useful links
+\item
+  https://www.python.org/
+\item
+  http://www.scipy.org/
+\end{itemize}
+
+ 
+
+    {[}Intro{]} ~ Core packages for scientific computing
+
+\begin{itemize}
+\item
+  IPython - an advanced interactive shell
+\item
+  NumPy - tools for manipulating numerical arrays
+\item
+  Matplotlib - plotting in 2D and 3D
+\item
+  SciPy - High-level scientific routines for common algorithms
+  e.g.~numerical integration, optimisation, Fourier transforms
+\end{itemize}
+
+ 
+
+    {[}Intro{]} ~ Other useful packages
+
+\begin{itemize}
+\item
+  mpi4py : message passing parallel programming
+\item
+  pandas : data analysis library
+\item
+  scikit-learn : machine learning
+\end{itemize}
+
+\ldots{} and many more \ldots{}
+
+    {[}Intro{]} ~ Some cautions
+
+\begin{itemize}
+\item
+  Some backward compatability problems between versions 3.x and 2.x
+\item
+  Many packages can risk complex dependency ``sprawl''
+\item
+  It's interpreted
+\item
+  HPC tools (debuggers, profilers) lag behind compiled languages
+\end{itemize}
+
+    {[}Intro{]} ~ How to run Python?
+
+Python code is executed by an interpreter: python
+
+Python has two modes of operating:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  non-interactive
+\item
+  interactive
+\end{itemize}
+
+ 
+
+    {[}Intro{]} ~ Non-interactive Python
+
+In non-interactive mode, run the Python interpreter with a file
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+   \textasciitilde{}\$ python myscript.py 
+\item
+  Python module files end in .py extension
+\item
+  ideal for persistent, resueable, large (complex) code
+\end{itemize}
+
+    {[}Intro{]} ~ Non-interactive Python : Hello world!
+
+Try it! Run ``helloworld.py'' from the command-line (same directory as
+notebook)
+
+\textasciitilde{}\$ python helloworld.py Hello world!
+
+    {[}Intro{]} ~ Interactive Python : the Python shell
+
+Interactive mode : run Python interpreter without a file
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Interpreter runs as a Python shell (interactive Python runtime
+  environment)
+\item
+  Type Python commands directly into the Python shell (after the prompt
+  \textgreater{}\textgreater{}\textgreater{})
+\item
+  Ideal for trying out commands, experimenting
+\item
+  Use Ctrl+d to exit
+\item
+  By default, lose session history when you exit shell
+\end{itemize}
+
+    {[}Intro{]} ~ Interactive Python : Hello world!
+
+ Try it! Launch a Python shell and after the prompt type : ~ print
+``Hello world!''
+
+\textasciitilde{}\$ python Python 2.7.10 (default, Jul 01 2015,
+09:00:00) {[}GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39){]} on
+darwin Type ``help'', ``copyright'', ``credits'' or ``license'' for more
+information. \textgreater{}\textgreater{}\textgreater{} print ``Hello
+world!'' Hello world!
+
+    {[}Intro{]} ~ IPython shell
+
+\begin{itemize}
+\item
+  IPython is an enhanced Python shell
+\item
+  Ideal for interactive data manipulation and visualisation
+\item
+  Has features and built-in commands that make it easier to use than the
+  standard Python shell
+\item
+  Launch an IPython shell like a Python shell (without a script):
+  ipython
+\item
+  Useful links : http://ipython.org/
+\end{itemize}
+
+    {[}Intro{]} ~ IPython shell : useful commands
+
+\begin{itemize}
+\item
+  TAB completion to list available functions in a module
+  e.g.~module.a\textless{}TAB\textgreater{}
+\item
+  Query what function does with ? e.g.~function?
+\item
+  `Magic' commands with \%
+\item
+  \%hist to see commands issued so far
+\item
+  \%save to save commands issued so far
+\item
+  Paste code straight into IPython shell
+\item
+  Access system commands using !, e.g. !ls -l
+\item
+  Command quickref for a summary of capabilities
+\end{itemize}
+
+    {[}Intro{]} ~ IPython shell : Hello world!
+
+Try it! Launch an IPython shell and print ``Hello world!''
+
+IPython 4.0.0 -- An enhanced Interactive Python. ? -\textgreater{}
+Introduction and overview of IPython's features. \%quickref
+-\textgreater{} Quick reference. help -\textgreater{} Python's own help
+system. object? -\textgreater{} Details about `object', use `object??'
+for extra details. In {[}1{]}: print ``Hello world!'' Hello world!
+
+    {[}Intro{]} ~ Python basics recap : data types
+
+\begin{itemize}
+\item
+  Data types
+\item
+  integer e.g. -1, float e.g.~3.1412
+\item
+  string e.g. `a string' or e.g. ``a string also''
+\item
+  Dynamically typed, no explicit declaration
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    e.g.~can have x=100, followed by x=``100'' without error
+  \end{itemize}
+\item
+  Can cast one data type into another e.g.~x=int(``100'')
+\end{itemize}
+
+    {[}Intro{]} ~ Python basics recap : data types II
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  list : elements can be a mix of types e.g. {[}3, ``a'', False{]}
+\item
+  dictionary : like lists with generalised keys e.g.
+  \{``key1'':``value1'', ``key2'':``value2''\}
+\item
+  tuple : an immutable sequence e.g. (1,2,3) or 1,2,3
+\item
+  empty tuple: (~)
+\item
+  ``one-tuple'' must have comma: e.g. (1,)
+\end{itemize}
+
+    {[}Intro{]} ~ Python basics recap : importing ~ I
+
+A module is a file (e.g.~mymodule.py) containing Python definitions and
+statements
+
+To use functions defined within a module, need to import functionality
+
+    {[}Intro{]} ~ Python basics recap : importing ~ II
+
+There are several ways to import functionality
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  import mymodule, call function as mymodule.afunc
+\item
+  from mymodule import afunc, call function as afunc
+\item
+  To save typing, can use alias for imported module
+\end{enumerate}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  import mymodule as mod, then use mod.afunc
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Avoid importing everything from a module
+\end{enumerate}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  from module import *
+\end{itemize}
+
+    {[}Intro{]} ~ Python basics recap : code structure
+
+Whitespace matters, code blocks are indented with a tab or 4 spaces
+(need colons!) * for item in list: ~ ~ ~ \#do some stuff * if condition:
+~ ~ ~ \#do some stuff * def myfunc(arg1, arg2): ~ ~ ~ \#do some stuff 
+
+    {[}Intro{]} ~ Python basics recap : functions I
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  A number of built-in functions
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    Available from the interpreter, e.g., len(), int() 
+  \end{itemize}
+\item
+  Methods related built-in datatypes (objects)
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    Via dot notation, e.g., list.append(), list.sort()
+  \end{itemize}
+\end{itemize}
+
+    {[}Intro{]} ~ Python basics recap : functions II
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Very large selection of standard library packages:
+\item
+  Always available as part of python
+\item
+  import required package
+\item
+  invoke method as package.method()
+\item
+  Growing seleection of additional packages
+\item
+  May need to install appropriate version
+\item
+  May need addition to PYTHONPATH
+\item
+  import package and invoke as above
+\end{itemize}
+
+    {[}Intro{]} ~ Python basics recap : script files
+
+\begin{itemize}
+\item
+  At the top of script files you may see:
+\item
+  \#!/usr/bin/env python 
+\item
+  Locate interpreter from your environment's \$PATH
+\item
+  At the bottom of script files you may see:
+\item
+  if \_\_name\_\_ == ``\_\emph{main\_}'': ~ ~ ~ ~ ~ import sys ~ ~ ~ ~ ~
+  function(sys.argv)
+\item
+  Makes file usable as a script as well as an importable module
+\end{itemize}
+
+    {[}Intro{]} ~ Python basics recap : references
+
+\begin{itemize}
+\item
+  Careful - variables are references
+\item
+  variables are references to objects: let a = 3, b = a; if b = 5 then a
+  = 5 (try it!)
+\item
+  Getting help: make use of online documentation
+\item
+  Documentation
+\item
+  https://docs.python.org/
+\item
+  https://www.codecademy.com/learn/python
+\end{itemize}
+
+    {[}Intro{]} ~ Warm-up : exercise ~ I
+
+Define a function age that takes a list of years between 1950 and 2015
+and returns the median age, and the two ages closest to it, where age =
+2015 - year. Assume the input list is randomly ordered and has an odd
+number of elements $N$, where $N >= 3$. So for:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  years = {[}1989, 1955, 2011, 1943, 1975{]}, age returns {[}26, 40,
+  60{]}
+\item
+  Note: for a sorted list of numbers, the median is the number in the
+  middle of the list.
+\end{itemize}
+
+    {[}Intro{]} ~ Warm-up : exercise ~ II
+
+Steps to take:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  You will need to create the input list. You can do this manually or
+  use Python\ldots{}{[}Hint: you may want to use random.randint(start,
+  stop){]}
+\item
+  You will need to sort the list
+\item
+  Use list indexing where possible e.g.~list{[}3:5{]}
+\item
+  Make sure to test your function.
+\end{enumerate}
+
+    {[}Intro{]} ~ Warm-up exercise : a solution
+
+~
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} function to calculate the median age and }
+        \PY{c}{\PYZsh{} its two neighbours from a list of years}
+        
+        \PY{k}{def} \PY{n+nf}{medianage}\PY{p}{(}\PY{n}{years}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ages}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{;}
+            \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{years}\PY{p}{:}
+                \PY{n}{ages}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{2015}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{)}\PY{p}{;}
+            \PY{n}{ages}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+            \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{ages}\PY{p}{)}\PY{p}{;}
+            \PY{n}{mid} \PY{o}{=} \PY{n}{n}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{;}
+            \PY{k}{return} \PY{n}{ages}\PY{p}{[}\PY{n}{mid}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{mid}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{;}
+        
+        \PY{n}{years} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1989}\PY{p}{,} \PY{l+m+mi}{1955}\PY{p}{,} \PY{l+m+mi}{2011}\PY{p}{,} \PY{l+m+mi}{1943}\PY{p}{,} \PY{l+m+mi}{1975}\PY{p}{]}\PY{p}{;}
+        \PY{n}{medianage}\PY{p}{(}\PY{n}{years}\PY{p}{)}
+\end{Verbatim}
+
+    {[}Intro{]} ~ Warm-up : optional ~ I
+
+Read the list of years from a text file, `years.txt', which should have
+the total number of years $N$ in the first line, followed by a numbered
+list of years:
+
+~ ~ ~ total number of years ~ ~ ~ 1 year ~ ~ ~ \ldots{}
+
+    {[}Intro{]} ~ Warm-up : optional ~ II
+
+To generate the input file `years.txt', you may need:
+
+import sys, ~ yearsfn=open(filename, ``w''), ~ input.close(), ~
+output.write(``\{0:2d\} \{1:2d\}\n''.format(i, j))
+
+To read the input file `years.txt', you may need:
+
+input=open(filename, ``w''),~ line = infile.readline(), ~ line.rstrip(),
+~ line.split(), ~ int(``9''),
+
+Could you use list comprehension (if you haven't already)? ~ ~ ~ ~ ~
+E.g. ~ squared = {[}x*x for x in list{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} extended exercise : create an input file containing}
+        \PY{c}{\PYZsh{} years}
+        
+        \PY{k+kn}{from} \PY{n+nn}{random} \PY{k+kn}{import} \PY{n}{randint}\PY{p}{;}
+        \PY{k+kn}{import} \PY{n+nn}{sys}\PY{p}{;}
+        \PY{k+kn}{import} \PY{n+nn}{age}\PY{p}{;}
+        
+        \PY{n}{years} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1989}\PY{p}{,} \PY{l+m+mi}{1955}\PY{p}{,} \PY{l+m+mi}{2011}\PY{p}{,} \PY{l+m+mi}{1943}\PY{p}{,} \PY{l+m+mi}{1975}\PY{p}{]}\PY{p}{;}
+        \PY{n}{medianage}\PY{p}{(}\PY{n}{years}\PY{p}{)}\PY{p}{;}
+        
+        \PY{c}{\PYZsh{} using list comprehension}
+        \PY{n}{years} \PY{o}{=} \PY{p}{[}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1950}\PY{p}{,}\PY{l+m+mi}{2015}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{]}\PY{p}{;} 
+        
+        \PY{c}{\PYZsh{} save years to file}
+        \PY{n}{outyears} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{years.txt}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{w}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{c}{\PYZsh{} output total number of years}
+        \PY{n}{outyears}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}0:2d\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{years2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                       
+        \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{years2}\PY{p}{:}
+            \PY{n}{outyears}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}0:2d\PYZcb{} \PYZob{}1:2d\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+            \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{;}
+            
+        \PY{n}{outyears}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+        \PY{c}{\PYZsh{} read file}
+        \PY{n}{inyears} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{years.txt}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{r}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{line} \PY{o}{=} \PY{n}{inyears}\PY{o}{.}\PY{n}{readline}\PY{p}{(}\PY{p}{)}
+        \PY{c}{\PYZsh{} remove any newline characters}
+        \PY{n}{N}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{line}\PY{p}{)}\PY{p}{;}
+        
+        \PY{n}{ages}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{;}
+        \PY{n}{yrs}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{;}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+            \PY{n}{line} \PY{o}{=} \PY{n}{inyears}\PY{o}{.}\PY{n}{readline}\PY{p}{(}\PY{p}{)}
+            \PY{n}{line} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{rstrip}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{tokens} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{yrs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{tokens}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+        
+        \PY{n}{inyears}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} check...}
+        \PY{k}{print} \PY{n}{yrs}
+        
+        \PY{c}{\PYZsh{} get median age}
+        \PY{n}{medianage}\PY{p}{(}\PY{n}{yrs}\PY{p}{)}
+\end{Verbatim}
+
+    {[}Intro{]} Summary
+
+We have considered why Scientific Computing in Python is a worthwhile
+pursuit
+
+We have reviewed how to use Python together with some Python basics
+
+We have also been introduced to the IPython shell
+
+We are now ready to explore the packages that constitute the backbone of
+scientific python
+
+Next session : NumPy
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
